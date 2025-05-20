@@ -11,3 +11,5 @@ part 'src/bnb_layout_custom_painter.dart';
 part 'src/bnb_style.dart';
 
 part 'src/bnb_item_widget.dart';
+
+part 'src/bnb_widget.dart';

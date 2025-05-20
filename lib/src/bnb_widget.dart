@@ -1,5 +1,4 @@
-import 'package:bnb_flutter/bnb_flutter.dart';
-import 'package:flutter/material.dart';
+part of '../bnb_flutter.dart';
 
 class BnbWidget extends StatefulWidget {
   final List<BnbItemWidget> items;
