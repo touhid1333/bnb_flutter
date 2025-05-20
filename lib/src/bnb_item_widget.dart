@@ -14,7 +14,7 @@ class BnbItemWidget extends StatefulWidget {
     required this.onTap,
     this.icon,
     required this.index,
-  }) : assert(iconData == null && assetImage == null && icon == null);
+  }) : assert((iconData == null && assetImage == null && icon == null) ? false : true);
 
   @override
   State<BnbItemWidget> createState() => _BnbItemWidgetState();

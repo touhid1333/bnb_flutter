@@ -16,8 +16,7 @@ class _BnbAnimatedIconButton extends StatefulWidget {
       required this.onTap});
 
   @override
-  State<_BnbAnimatedIconButton> createState() =>
-      _BnbAnimatedIconButtonState();
+  State<_BnbAnimatedIconButton> createState() => _BnbAnimatedIconButtonState();
 }
 
 class _BnbAnimatedIconButtonState extends State<_BnbAnimatedIconButton>
@@ -30,7 +29,7 @@ class _BnbAnimatedIconButtonState extends State<_BnbAnimatedIconButton>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 100),
+      duration: const Duration(milliseconds: 50),
     );
 
     _animation = Tween<double>(begin: 0, end: 1).animate(
@@ -78,7 +77,10 @@ class _BnbAnimatedIconButtonState extends State<_BnbAnimatedIconButton>
             onTap: _onTap,
             child: widget.icon ??
                 (widget.iconData != null
-                    ? Icon(widget.iconData!)
+                    ? Icon(
+                        widget.iconData!,
+                        color: Colors.white,
+                      )
                     : widget.assetImage != null
                         ? Image.asset(widget.assetImage!)
                         : Text("${widget.index}")),

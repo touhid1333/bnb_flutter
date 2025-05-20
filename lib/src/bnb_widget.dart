@@ -2,6 +2,7 @@ part of '../bnb_flutter.dart';
 
 class BnbWidget extends StatefulWidget {
   final List<BnbItemWidget> items;
+  final int selectedIndex;
   final BnbStyle? style;
   final Function(int) onTap;
 
@@ -10,6 +11,7 @@ class BnbWidget extends StatefulWidget {
     required this.items,
     this.style,
     required this.onTap,
+    required this.selectedIndex,
   }) : assert(items.length > 0 && items.length <= 5);
 
   @override
@@ -17,6 +19,16 @@ class BnbWidget extends StatefulWidget {
 }
 
 class _BnbWidgetState extends State<BnbWidget> {
+  double _previousIndex = 0;
+
+  @override
+  void didUpdateWidget(covariant BnbWidget oldWidget) {
+    if (oldWidget.selectedIndex != widget.selectedIndex) {
+      _previousIndex = oldWidget.selectedIndex.toDouble();
+    }
+    super.didUpdateWidget(oldWidget);
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -24,121 +36,61 @@ class _BnbWidgetState extends State<BnbWidget> {
       height: 80,
       child: Stack(
         children: [
-          CustomPaint(
-            size: const Size(double.maxFinite, double.maxFinite),
-            painter: BNBCustomPainter(theme.colorScheme.primary),
+          TweenAnimationBuilder<double>(
+            tween: Tween(
+                begin: _previousIndex, end: widget.selectedIndex.toDouble()),
+            duration: const Duration(milliseconds: 400),
+            curve: Curves.easeInCirc,
+            builder: (context, value, child) => CustomPaint(
+              size: const Size(double.maxFinite, double.maxFinite),
+              painter: BNBCustomPainter(
+                  theme.colorScheme.primary, value, widget.items.length),
+            ),
           ),
           Positioned(
             top: 5,
             left: 0,
             right: 0,
+            bottom: 0,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: widget.items
-                  .map(
-                    (e) => Align(
-                      alignment: Alignment.topCenter,
-                      child: SizedBox(
-                        height: 60,
-                        width: 60,
-                        child: Stack(
-                          children: [
-                            CustomPaint(
-                              size: const Size(60, 60),
-                              painter: BNBCenterCustomPainter(
-                                  theme.colorScheme.primary),
+              children: [
+                for (int i = 0; i < widget.items.length; i++) ...[
+                  Expanded(
+                    child: i == widget.selectedIndex
+                        ? Align(
+                            alignment: Alignment.topCenter,
+                            child: SizedBox(
+                              height: 60,
+                              width: 60,
+                              child: Stack(
+                                children: [
+                                  CustomPaint(
+                                    size: const Size(60, 60),
+                                    painter: BNBCenterCustomPainter(
+                                        theme.colorScheme.primary),
+                                  ),
+                                  Center(
+                                    child: widget.items[i],
+                                  ),
+                                ],
+                              ),
                             ),
-                            Center(
-                              child: e,
+                          )
+                        : Align(
+                            alignment: Alignment.bottomCenter,
+                            child: SizedBox(
+                              height: 60,
+                              child: Center(
+                                child: widget.items[i],
+                              ),
                             ),
-                          ],
-                        ),
-                      ),
-                    ),
+                          ),
                   )
-                  .toList(),
+                ],
+              ],
             ),
           ),
-          /*Positioned(
-            top: 20,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            child: Center(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  CustomAnimatedIconButton(
-                    onTap: () {},
-                    icon: FaIcon(
-                      FontAwesomeIcons.house,
-                      color: theme.colorScheme.onPrimary,
-                      size: 24,
-                    ),
-                  ),
-                  CustomAnimatedIconButton(
-                    onTap: () {},
-                    icon: FaIcon(
-                      FontAwesomeIcons.house,
-                      color: theme.colorScheme.onPrimary,
-                      size: 24,
-                    ),
-                  ),
-                  SizedBox(
-                    width: MediaQuery.sizeOf(context).width * 0.25,
-                  ),
-                  CustomAnimatedIconButton(
-                    onTap: () {},
-                    icon: FaIcon(
-                      FontAwesomeIcons.house,
-                      color: theme.colorScheme.onPrimary,
-                      size: 24,
-                    ),
-                  ),
-                  CustomAnimatedIconButton(
-                    onTap: () {},
-                    icon: FaIcon(
-                      FontAwesomeIcons.house,
-                      color: theme.colorScheme.onPrimary,
-                      size: 24,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),*/
-          /*Positioned(
-            top: 5,
-            left: 0,
-            right: 0,
-            child: Center(
-              child: SizedBox(
-                height: 60,
-                width: 60,
-                child: Stack(
-                  children: [
-                    CustomPaint(
-                      size: const Size(60, 60),
-                      painter:
-                          BNBCenterCustomPainter(theme.colorScheme.primary),
-                    ),
-                    Center(
-                      child: CustomAnimatedIconButton(
-                        onTap: () {},
-                        icon: FaIcon(
-                          FontAwesomeIcons.house,
-                          color: theme.colorScheme.onPrimary,
-                          size: 24,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),*/
         ],
       ),
     );
