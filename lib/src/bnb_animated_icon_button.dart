@@ -1,13 +1,12 @@
 part of '../bnb_flutter.dart';
 
-class _BnbAnimatedIconButton extends StatefulWidget {
+class _BnbAnimatedIconButton extends StatelessWidget {
   final int index;
   final bool isSelected;
   final IconData? iconData;
   final String? assetImage;
   final Widget? icon;
   final BnbStyle? style;
-  final Function(int) onTap;
 
   const _BnbAnimatedIconButton({
     super.key,
@@ -15,107 +14,41 @@ class _BnbAnimatedIconButton extends StatefulWidget {
     this.iconData,
     this.assetImage,
     this.icon,
-    required this.onTap,
     this.style,
     required this.isSelected,
   }) : assert((iconData == null && assetImage == null && icon == null)
             ? false
             : true);
 
-  @override
-  State<_BnbAnimatedIconButton> createState() => _BnbAnimatedIconButtonState();
-}
-
-class _BnbAnimatedIconButtonState extends State<_BnbAnimatedIconButton>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _animation;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 200),
-    );
-
-    _animation = Tween<double>(begin: 0, end: 1).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeOutBack),
-    );
-
-    _controller.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        var result = _controller.reverse(); // Animate back to original
-        result.whenComplete(() {
-          _controller.reset();
-          Future.delayed(
-            const Duration(milliseconds: 100),
-            () {
-              widget.onTap(widget.index);
-            },
-          );
-        });
-      }
-    });
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  void _onTap() {
-    _controller.reset();
-    _controller.forward(from: 0);
-  }
-
+  // -----------------------------------
+  // Build
+  // -----------------------------------
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return AnimatedBuilder(
-      animation: _animation,
-      builder: (context, child) {
-        final scale = 1 + (_animation.value * 0.3);
-        final tilt = _animation.value * 0.1;
-
-        return Transform(
-          transform: Matrix4.identity()
-            ..setEntry(3, 2, 0.001) // perspective
-            ..rotateX(tilt)
-            ..rotateY(tilt)
-            ..scale(scale),
-          alignment: Alignment.center,
-          child: GestureDetector(
-            onTap: _onTap,
-            child: widget.icon ??
-                (widget.iconData != null
-                    ? Icon(
-                        widget.iconData!,
-                        color: widget.isSelected
-                            ? (widget.style?.foregroundColor ??
-                                theme.colorScheme.onPrimary)
-                            : (widget.style?.unSelectedForegroundColor ??
-                                widget.style?.foregroundColor ??
-                                theme.colorScheme.onPrimary),
-                        size: widget.style?.iconSize?.height ?? 16,
-                      )
-                    : widget.assetImage != null
-                        ? Image.asset(
-                            widget.assetImage!,
-                            color: widget.isSelected
-                                ? (widget.style?.foregroundColor ??
-                                    theme.colorScheme.onPrimary)
-                                : (widget.style?.unSelectedForegroundColor ??
-                                    widget.style?.foregroundColor ??
-                                    theme.colorScheme.onPrimary),
-                            height: widget.style?.iconSize?.height ?? 16,
-                            width: widget.style?.iconSize?.width ?? 16,
-                          )
-                        : Text("${widget.index}")),
-          ),
-        );
-      },
-    );
+    return icon ??
+        (iconData != null
+            ? Icon(
+                iconData!,
+                color: isSelected
+                    ? (style?.foregroundColor ?? theme.colorScheme.onPrimary)
+                    : (style?.unSelectedForegroundColor ??
+                        style?.foregroundColor ??
+                        theme.colorScheme.onPrimary),
+                size: style?.iconSize?.height ?? 16,
+              )
+            : assetImage != null
+                ? Image.asset(
+                    assetImage!,
+                    color: isSelected
+                        ? (style?.foregroundColor ??
+                            theme.colorScheme.onPrimary)
+                        : (style?.unSelectedForegroundColor ??
+                            style?.foregroundColor ??
+                            theme.colorScheme.onPrimary),
+                    height: style?.iconSize?.height ?? 16,
+                    width: style?.iconSize?.width ?? 16,
+                  )
+                : Text("$index"));
   }
 }

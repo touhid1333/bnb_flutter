@@ -39,8 +39,8 @@ class _BnbWidgetState extends State<BnbWidget> {
           TweenAnimationBuilder<double>(
             tween: Tween(
                 begin: _previousIndex, end: widget.selectedIndex.toDouble()),
-            duration: const Duration(milliseconds: 400),
-            curve: Curves.easeIn,
+            duration: const Duration(milliseconds: 150),
+            curve: Curves.easeInOut,
             builder: (context, value, child) => CustomPaint(
               size: const Size(double.maxFinite, double.maxFinite),
               painter: BNBCustomPainter(
@@ -63,44 +63,55 @@ class _BnbWidgetState extends State<BnbWidget> {
                     child: i == widget.selectedIndex
                         ? Align(
                             alignment: Alignment.topCenter,
-                            child: SizedBox(
-                              height: 60,
-                              width: 60,
-                              child: Stack(
-                                children: [
-                                  CustomPaint(
-                                    size: const Size(60, 60),
-                                    painter: BNBCenterCustomPainter(
-                                        theme.colorScheme.primary),
-                                  ),
-                                  Center(
-                                    child: _BnbAnimatedIconButton(
-                                      onTap: widget.onTap,
-                                      index: i,
-                                      isSelected: i == widget.selectedIndex,
-                                      style: widget.style,
-                                      iconData: widget.items[i].iconData,
-                                      assetImage: widget.items[i].assetImage,
-                                      icon: widget.items[i].icon,
+                            child: GestureDetector(
+                              behavior: HitTestBehavior.translucent,
+                              onTap: () {
+                                widget.onTap(i);
+                              },
+                              child: SizedBox(
+                                height: 60,
+                                width: 60,
+                                child: Stack(
+                                  children: [
+                                    CustomPaint(
+                                      size: const Size(60, 60),
+                                      painter: BNBCenterCustomPainter(
+                                          theme.colorScheme.primary),
                                     ),
-                                  ),
-                                ],
+                                    Center(
+                                      child: _BnbAnimatedIconButton(
+                                        index: i,
+                                        isSelected: i == widget.selectedIndex,
+                                        style: widget.style,
+                                        iconData: widget.items[i].iconData,
+                                        assetImage: widget.items[i].assetImage,
+                                        icon: widget.items[i].icon,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           )
                         : Align(
                             alignment: Alignment.bottomCenter,
-                            child: SizedBox(
-                              height: 60,
-                              child: Center(
-                                child: _BnbAnimatedIconButton(
-                                  onTap: widget.onTap,
-                                  index: i,
-                                  isSelected: i == widget.selectedIndex,
-                                  style: widget.style,
-                                  iconData: widget.items[i].iconData,
-                                  assetImage: widget.items[i].assetImage,
-                                  icon: widget.items[i].icon,
+                            child: GestureDetector(
+                              behavior: HitTestBehavior.translucent,
+                              onTap: () {
+                                widget.onTap(i);
+                              },
+                              child: SizedBox(
+                                height: 60,
+                                width: 60,
+                                child: Center(
+                                  child: _BnbAnimatedIconButton(
+                                    index: i,
+                                    isSelected: i == widget.selectedIndex,
+                                    style: widget.style,
+                                    iconData: widget.items[i].iconData,
+                                    assetImage: widget.items[i].assetImage,
+                                    icon: widget.items[i].icon,
+                                  ),
                                 ),
                               ),
                             ),
