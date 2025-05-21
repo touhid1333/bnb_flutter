@@ -18,7 +18,9 @@ class _BnbAnimatedIconButton extends StatefulWidget {
     required this.onTap,
     this.style,
     required this.isSelected,
-  });
+  }) : assert((iconData == null && assetImage == null && icon == null)
+            ? false
+            : true);
 
   @override
   State<_BnbAnimatedIconButton> createState() => _BnbAnimatedIconButtonState();

@@ -74,7 +74,7 @@ class _BnbWidgetState extends State<BnbWidget> {
                                         theme.colorScheme.primary),
                                   ),
                                   Center(
-                                    child: _BnbItemWidget(
+                                    child: _BnbAnimatedIconButton(
                                       onTap: widget.onTap,
                                       index: i,
                                       isSelected: i == widget.selectedIndex,
@@ -93,7 +93,7 @@ class _BnbWidgetState extends State<BnbWidget> {
                             child: SizedBox(
                               height: 60,
                               child: Center(
-                                child: _BnbItemWidget(
+                                child: _BnbAnimatedIconButton(
                                   onTap: widget.onTap,
                                   index: i,
                                   isSelected: i == widget.selectedIndex,
