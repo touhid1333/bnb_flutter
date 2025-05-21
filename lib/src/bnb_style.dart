@@ -6,10 +6,10 @@ class BnbStyle {
   final Color? unSelectedForegroundColor;
   final Size? iconSize;
 
-  BnbStyle(
+  BnbStyle({
     this.backgroundColor,
     this.foregroundColor,
     this.unSelectedForegroundColor,
     this.iconSize,
-  );
+  });
 }

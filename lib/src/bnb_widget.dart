@@ -1,7 +1,7 @@
 part of '../bnb_flutter.dart';
 
 class BnbWidget extends StatefulWidget {
-  final List<BnbItemWidget> items;
+  final List<BnbItem> items;
   final int selectedIndex;
   final BnbStyle? style;
   final Function(int) onTap;
@@ -40,11 +40,14 @@ class _BnbWidgetState extends State<BnbWidget> {
             tween: Tween(
                 begin: _previousIndex, end: widget.selectedIndex.toDouble()),
             duration: const Duration(milliseconds: 400),
-            curve: Curves.easeInCirc,
+            curve: Curves.easeIn,
             builder: (context, value, child) => CustomPaint(
               size: const Size(double.maxFinite, double.maxFinite),
               painter: BNBCustomPainter(
-                  theme.colorScheme.primary, value, widget.items.length),
+                widget.style?.backgroundColor ?? theme.colorScheme.primary,
+                value,
+                widget.items.length,
+              ),
             ),
           ),
           Positioned(
@@ -71,7 +74,15 @@ class _BnbWidgetState extends State<BnbWidget> {
                                         theme.colorScheme.primary),
                                   ),
                                   Center(
-                                    child: widget.items[i],
+                                    child: _BnbItemWidget(
+                                      onTap: widget.onTap,
+                                      index: i,
+                                      isSelected: i == widget.selectedIndex,
+                                      style: widget.style,
+                                      iconData: widget.items[i].iconData,
+                                      assetImage: widget.items[i].assetImage,
+                                      icon: widget.items[i].icon,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -82,7 +93,15 @@ class _BnbWidgetState extends State<BnbWidget> {
                             child: SizedBox(
                               height: 60,
                               child: Center(
-                                child: widget.items[i],
+                                child: _BnbItemWidget(
+                                  onTap: widget.onTap,
+                                  index: i,
+                                  isSelected: i == widget.selectedIndex,
+                                  style: widget.style,
+                                  iconData: widget.items[i].iconData,
+                                  assetImage: widget.items[i].assetImage,
+                                  icon: widget.items[i].icon,
+                                ),
                               ),
                             ),
                           ),

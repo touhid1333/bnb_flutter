@@ -2,18 +2,23 @@ part of '../bnb_flutter.dart';
 
 class _BnbAnimatedIconButton extends StatefulWidget {
   final int index;
+  final bool isSelected;
   final IconData? iconData;
   final String? assetImage;
   final Widget? icon;
+  final BnbStyle? style;
   final Function(int) onTap;
 
-  const _BnbAnimatedIconButton(
-      {super.key,
-      required this.index,
-      this.iconData,
-      this.assetImage,
-      this.icon,
-      required this.onTap});
+  const _BnbAnimatedIconButton({
+    super.key,
+    required this.index,
+    this.iconData,
+    this.assetImage,
+    this.icon,
+    required this.onTap,
+    this.style,
+    required this.isSelected,
+  });
 
   @override
   State<_BnbAnimatedIconButton> createState() => _BnbAnimatedIconButtonState();
@@ -29,7 +34,7 @@ class _BnbAnimatedIconButtonState extends State<_BnbAnimatedIconButton>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 50),
+      duration: const Duration(milliseconds: 200),
     );
 
     _animation = Tween<double>(begin: 0, end: 1).animate(
@@ -41,7 +46,12 @@ class _BnbAnimatedIconButtonState extends State<_BnbAnimatedIconButton>
         var result = _controller.reverse(); // Animate back to original
         result.whenComplete(() {
           _controller.reset();
-          widget.onTap(widget.index);
+          Future.delayed(
+            const Duration(milliseconds: 100),
+            () {
+              widget.onTap(widget.index);
+            },
+          );
         });
       }
     });
@@ -60,6 +70,7 @@ class _BnbAnimatedIconButtonState extends State<_BnbAnimatedIconButton>
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return AnimatedBuilder(
       animation: _animation,
       builder: (context, child) {
@@ -79,10 +90,26 @@ class _BnbAnimatedIconButtonState extends State<_BnbAnimatedIconButton>
                 (widget.iconData != null
                     ? Icon(
                         widget.iconData!,
-                        color: Colors.white,
+                        color: widget.isSelected
+                            ? (widget.style?.foregroundColor ??
+                                theme.colorScheme.onPrimary)
+                            : (widget.style?.unSelectedForegroundColor ??
+                                widget.style?.foregroundColor ??
+                                theme.colorScheme.onPrimary),
+                        size: widget.style?.iconSize?.height ?? 16,
                       )
                     : widget.assetImage != null
-                        ? Image.asset(widget.assetImage!)
+                        ? Image.asset(
+                            widget.assetImage!,
+                            color: widget.isSelected
+                                ? (widget.style?.foregroundColor ??
+                                    theme.colorScheme.onPrimary)
+                                : (widget.style?.unSelectedForegroundColor ??
+                                    widget.style?.foregroundColor ??
+                                    theme.colorScheme.onPrimary),
+                            height: widget.style?.iconSize?.height ?? 16,
+                            width: widget.style?.iconSize?.width ?? 16,
+                          )
                         : Text("${widget.index}")),
           ),
         );
