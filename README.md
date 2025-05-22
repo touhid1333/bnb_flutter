@@ -3,7 +3,8 @@
 [![GitHub Repo](https://img.shields.io/badge/GitHub-bnb__flutter-blue?logo=github)](https://github.com/touhid1333/bnb_flutter)
 [![License](https://img.shields.io/github/license/touhid1333/bnb_flutter)](https://github.com/touhid1333/bnb_flutter/blob/master/LICENSE)
 
-A highly customizable Flutter bottom navigation bar package with smooth animations and flexible item support. Built for simplicity, responsiveness, and a native look and feel.
+A highly customizable Flutter bottom navigation bar package with smooth animations and flexible item
+support. Built for simplicity, responsiveness, and a native look and feel.
 
 ---
 
@@ -65,9 +66,10 @@ class MyBottomBar extends StatelessWidget {
           iconData: Icons.person,
         ),
       ],
-      onTap: (p0) => setState(() {
-        selectedIndex = p0;
-      }),
+      onTap: (p0) =>
+          setState(() {
+            selectedIndex = p0;
+          }),
       selectedIndex: selectedIndex,
       style: BnbStyle(
         iconSize: const Size(24, 24),
@@ -81,13 +83,16 @@ class MyBottomBar extends StatelessWidget {
 
 ## 📂 Example
 
-For a complete example, check the [example project](https://github.com/touhid1333/bnb_flutter/tree/master/example) included in the repository
+For a complete example, check
+the [example project](https://github.com/touhid1333/bnb_flutter/tree/master/example) included in the
+repository
 
 ---
 
 ## 📸 Screenshot
 
-![Screenshot](https://github.com/touhid1333/bnb_flutter/blob/master/assets/screenshot.jpg?raw=true)
+<img src="https://raw.githubusercontent.com/touhid1333/bnb_flutter/master/assets/screenshot.jpg" width="400"  alt="Example Image"/> 
+
 
 ---
 
@@ -105,7 +110,8 @@ Contributions are welcome! Feel free to open issues or submit PRs.
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/touhid1333/bnb_flutter/blob/master/LICENSE) file for details.
+This project is licensed under the MIT License - see
+the [LICENSE](https://github.com/touhid1333/bnb_flutter/blob/master/LICENSE) file for details.
 
 ---
 
