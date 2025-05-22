@@ -91,7 +91,7 @@ repository
 
 ## 📸 Screenshot
 
-<img src="https://raw.githubusercontent.com/touhid1333/bnb_flutter/master/assets/screenshot.jpg" width="400"  alt="Example Image"/> 
+![Screenshot](https://raw.githubusercontent.com/touhid1333/bnb_flutter/master/assets/screenshot.jpg)
 
 
 ---
@@ -110,7 +110,7 @@ Contributions are welcome! Feel free to open issues or submit PRs.
 
 ## 📄 License
 
-This project is licensed under the MIT License - see
+This project is licensed under the BSD 3-Clause License - see
 the [LICENSE](https://github.com/touhid1333/bnb_flutter/blob/master/LICENSE) file for details.
 
 ---
