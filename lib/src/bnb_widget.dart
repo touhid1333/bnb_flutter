@@ -1,5 +1,11 @@
 part of '../bnb_flutter.dart';
 
+///
+/// # Bnb Widget
+///
+/// Parameters : [items], [selectedIndex], [style], [onTap]
+///
+/// Basic bottom navigation widget
 class BnbWidget extends StatefulWidget {
   ///
   /// ## Items
