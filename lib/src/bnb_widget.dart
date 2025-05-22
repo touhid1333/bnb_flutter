@@ -1,9 +1,30 @@
 part of '../bnb_flutter.dart';
 
 class BnbWidget extends StatefulWidget {
+  ///
+  /// ## Items
+  ///
+  /// Required List<[BnbItem]>
   final List<BnbItem> items;
+
+  ///
+  /// ## Current Index
+  ///
+  /// Type: [int]
   final int selectedIndex;
+
+  ///
+  /// ## Style
+  ///
+  /// [BnbStyle]
+  ///
+  /// Basic styles for the bottom navigation bar
   final BnbStyle? style;
+
+  ///
+  /// ## On Tap
+  ///
+  /// Do your necessary work in this function
   final Function(int) onTap;
 
   const BnbWidget({
