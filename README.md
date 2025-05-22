@@ -88,7 +88,7 @@ For a complete example, check the [example project](https://github.com/touhid133
 ## 📸 Screenshot
 
 <p align="center">
-  <img src="https://github.com/touhid1333/bnb_flutter/blob/master/assets/screenshot.jpg" width="600" />
+  <img src="https://github.com/touhid1333/bnb_flutter/blob/master/assets/screenshot.jpg" width="450" />
 </p>
 
 ---
