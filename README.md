@@ -1,39 +1,117 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# bnb_flutter
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
+[![GitHub Repo](https://img.shields.io/badge/GitHub-bnb__flutter-blue?logo=github)](https://github.com/touhid1333/bnb_flutter)
+[![License](https://img.shields.io/github/license/touhid1333/bnb_flutter)](https://github.com/touhid1333/bnb_flutter/blob/master/LICENSE)
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
+A highly customizable Flutter bottom navigation bar package with smooth animations and flexible item support. Built for simplicity, responsiveness, and a native look and feel.
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+---
 
-## Features
+## ✨ Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+* 🎨 UI with smooth transition animations
+* 📱 Supports fixed and shifting navigation bar types
+* 🔄 State persistence across tab switches
+* 🔧 Easily integrates into any Flutter project
 
-## Getting started
+---
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+## 💻 Installation
 
-## Usage
+Add the following to your `pubspec.yaml`:
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
-```dart
-const like = 'sample';
+```yaml
+dependencies:
+  bnb_flutter: ^<latest_version>
 ```
 
-## Additional information
+Then run:
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+```bash
+flutter pub get
+```
+
+---
+
+## 🚀 Getting Started
+
+Import the package:
+
+```dart
+import 'package:bnb_flutter/bnb_flutter.dart';
+```
+
+Use the `BnbWidget` widget in your scaffold:
+
+```dart
+class MyBottomBar extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BnbWidget(
+      items: [
+        BnbItem(
+          iconData: Icons.home,
+        ),
+        BnbItem(
+          iconData: Icons.list,
+        ),
+        BnbItem(
+          iconData: Icons.settings,
+        ),
+        BnbItem(
+          iconData: Icons.book_outlined,
+        ),
+        BnbItem(
+          iconData: Icons.person,
+        ),
+      ],
+      onTap: (p0) => setState(() {
+        selectedIndex = p0;
+      }),
+      selectedIndex: selectedIndex,
+      style: BnbStyle(
+        iconSize: const Size(24, 24),
+      ),
+    );
+  }
+}
+```
+
+---
+
+## 📂 Example
+
+For a complete example, check the [example project](https://github.com/touhid1333/bnb_flutter/tree/master/example) included in the repository
+
+---
+
+## 📸 Screenshot
+
+<p align="center">
+  <img src="https://github.com/touhid1333/bnb_flutter/blob/master/assets/screenshot.jpg" width="600" />
+</p>
+
+---
+
+## 🛠️ Contribution
+
+Contributions are welcome! Feel free to open issues or submit PRs.
+
+1. Fork the repo
+2. Create a new branch (`git checkout -b feature/my-feature`)
+3. Commit your changes (`git commit -am 'Add new feature'`)
+4. Push to the branch (`git push origin feature/my-feature`)
+5. Create a new Pull Request
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/touhid1333/bnb_flutter/blob/master/LICENSE) file for details.
+
+---
+
+## 🤝 Author
+
+Developed with ❤️ by [Touhid](https://github.com/touhid1333)
+
